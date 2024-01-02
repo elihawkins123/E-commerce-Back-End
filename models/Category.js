@@ -2,10 +2,12 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
 const ProductTag = require('./ProductTag.js');
+const Tag = require('./Tag.js');
+const Product = require('./Product.js');
 
 class Category extends Model {}
 
-Category.init(
+category.init(
   {
     id: {
       type: DataTypes.INTEGER, 
@@ -97,7 +99,7 @@ Tag.init(
     modelName: 'tag',
   }
 );
-ProductTag.init(  
+productTag.init(  
   {
     id: {
       type: DataTypes.INTEGER, 
@@ -127,12 +129,12 @@ ProductTag.init(
     underscored: true,
     modelName: 'product_tag',
   }
-);  
+); 
 Product.hasMany(Category, {
   foreignKey: 'category_id',
   onDelete: 'CASCADE',
 });
-Category.belongsTo(Product, {
+category.belongsTo(Product, {
   foreignKey: 'category_id',
 });
 Product.hasMany(Tag, {
